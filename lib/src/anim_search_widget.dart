@@ -275,7 +275,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                         try{
                           widget.onExpandTap();
                         }catch(e){
-                          print(e)
+                          print(e);
                         }
                         ///forward == expand
                         _con.forward();
