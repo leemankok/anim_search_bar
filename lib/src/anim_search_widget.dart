@@ -191,7 +191,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
               duration: Duration(milliseconds: widget.animationDurationInMilli),
               left: (toggle == 0) ? 20.0 : 40.0,
               curve: Curves.easeOut,
-              top: 11.0,
+              top: 14.0,
 
               ///Using Animated opacity to change the opacity of th textField while expanding
               child: AnimatedOpacity(
