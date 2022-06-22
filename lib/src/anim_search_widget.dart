@@ -23,6 +23,7 @@ class AnimSearchBar extends StatefulWidget {
   final String helpText;
   final int animationDurationInMilli;
   final onSuffixTap;
+  final onExpandTap;
   final bool rtl;
   final bool autoFocus;
   final TextStyle? style;
@@ -63,6 +64,8 @@ class AnimSearchBar extends StatefulWidget {
 
     /// can add list of inputformatters to control the input
     this.inputFormatters,
+
+    this.onExpandTap,
   }) : super(key: key);
 
   @override
@@ -269,7 +272,11 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                           if (widget.autoFocus)
                             FocusScope.of(context).requestFocus(focusNode);
                         });
-
+                        try{
+                          widget.onExpandTap();
+                        }catch(e){
+                          print(e)
+                        }
                         ///forward == expand
                         _con.forward();
                       } else {
