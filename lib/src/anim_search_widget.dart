@@ -24,6 +24,7 @@ class AnimSearchBar extends StatefulWidget {
   final int animationDurationInMilli;
   final onSuffixTap;
   final onExpandTap;
+  final onchange;
   final bool rtl;
   final bool autoFocus;
   final TextStyle? style;
@@ -64,8 +65,8 @@ class AnimSearchBar extends StatefulWidget {
 
     /// can add list of inputformatters to control the input
     this.inputFormatters,
-
     this.onExpandTap,
+    this.onchange
   }) : super(key: key);
 
   @override
@@ -202,6 +203,8 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                   alignment: Alignment.topCenter,
                   width: widget.width / 1.7,
                   child: TextField(
+                    onChanged: (text) => widget.onchange(),
+
                     ///Text Controller. you can manipulate the text inside this textField by calling this controller.
                     controller: widget.textController,
                     inputFormatters: widget.inputFormatters,
@@ -211,9 +214,6 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                     onEditingComplete: () {
                       /// on editing complete the keyboard will be closed and the search bar will be closed
                       unfocusKeyboard();
-                      setState(() {
-                        toggle = 0;
-                      });
                     },
 
                     ///style is of type TextStyle, the default is just a color black
@@ -272,11 +272,12 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                           if (widget.autoFocus)
                             FocusScope.of(context).requestFocus(focusNode);
                         });
-                        try{
+                        try {
                           widget.onExpandTap();
-                        }catch(e){
+                        } catch (e) {
                           print(e);
                         }
+
                         ///forward == expand
                         _con.forward();
                       } else {
