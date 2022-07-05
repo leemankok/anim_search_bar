@@ -25,6 +25,7 @@ class AnimSearchBar extends StatefulWidget {
   final onSuffixTap;
   final onExpandTap;
   final onchange;
+  final onCloseTap;
   final bool rtl;
   final bool autoFocus;
   final TextStyle? style;
@@ -32,42 +33,44 @@ class AnimSearchBar extends StatefulWidget {
   final Color? color;
   final List<TextInputFormatter>? inputFormatters;
 
-  const AnimSearchBar({
-    Key? key,
+  const AnimSearchBar(
+      {Key? key,
 
-    /// The width cannot be null
-    required this.width,
+      /// The width cannot be null
+      required this.width,
 
-    /// The textController cannot be null
-    required this.textController,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.helpText = "Search...",
+      /// The textController cannot be null
+      required this.textController,
+      this.suffixIcon,
+      this.prefixIcon,
+      this.helpText = "Search...",
 
-    /// choose your custom color
-    this.color = Colors.white,
+      /// choose your custom color
+      this.color = Colors.white,
 
-    /// The onSuffixTap cannot be null
-    required this.onSuffixTap,
-    this.animationDurationInMilli = 375,
+      /// The onSuffixTap cannot be null
+      required this.onSuffixTap,
+      this.animationDurationInMilli = 375,
 
-    /// make the search bar to open from right to left
-    this.rtl = false,
+      /// make the search bar to open from right to left
+      this.rtl = false,
 
-    /// make the keyboard to show automatically when the searchbar is expanded
-    this.autoFocus = false,
+      /// make the keyboard to show automatically when the searchbar is expanded
+      this.autoFocus = false,
 
-    /// TextStyle of the contents inside the searchbar
-    this.style,
+      /// TextStyle of the contents inside the searchbar
+      this.style,
 
-    /// close the search on suffix tap
-    this.closeSearchOnSuffixTap = false,
+      /// close the search on suffix tap
+      this.closeSearchOnSuffixTap = false,
 
-    /// can add list of inputformatters to control the input
-    this.inputFormatters,
-    this.onExpandTap,
-    this.onchange
-  }) : super(key: key);
+      /// can add list of inputformatters to control the input
+      this.inputFormatters,
+      this.onExpandTap,
+      this.onchange,
+      this.onCloseTap
+      })
+      : super(key: key);
 
   @override
   _AnimSearchBarState createState() => _AnimSearchBarState();
@@ -288,6 +291,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                         setState(() {
                           if (widget.autoFocus) unfocusKeyboard();
                         });
+                        widget.onCloseTap();
 
                         ///reverse == close
                         _con.reverse();
